@@ -53,31 +53,33 @@ To : 64 bit 80x86 assembly langage (AT&T)
 // Digit := "0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"
 // Letter := "a"|...|"z"
 
+
 ## Travail personnel
 
-J'ai implémenté la boucle FOR dans la fonction ForStatement() dans compilateur.cpp.
+J'ai implémenté les fonctionnalités suivantes dans compilateur.cpp :
 
-La boucle FOR permet de répéter une instruction un nombre défini de fois.
-
-## Exemple de test (testfor.p)
-
+### 1. Boucle FOR avec TO
+Permet de répéter une instruction en comptant vers le haut.
+Exemple (testfor.p) :
 VAR a : INTEGER.
 FOR a := 1 TO 5 DO
     DISPLAY a.
-
 Résultat : 12345
 
-
-
-
-
-
-J'ai aussi ajouté le DOWNTO qui permet de compter à l'envers.
-
+### 2. Boucle FOR avec DOWNTO
+Permet de répéter une instruction en comptant vers le bas.
 Exemple (testdownto.p) :
-
 VAR a : INTEGER.
 FOR a := 5 DOWNTO 1 DO
     DISPLAY a.
-
 Résultat : 54321
+
+### 3. Boucle FOR avec STEP
+Permet de définir le pas d'incrémentation ou de décrémentation.
+Exemple (teststep.p) :
+VAR a : INTEGER.
+FOR a := 1 TO 10 STEP 2 DO
+    DISPLAY a.
+Résultat : 13579
+
+
