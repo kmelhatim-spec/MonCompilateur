@@ -537,8 +537,47 @@ void DisplayStatement(void){
 
 // ForStatement := "For" ID ":=" Expression ("TO"|"DOWNTO") Expression "DO" Statement
 void ForStatement(void){
+    unsigned long long tag = TagNumber++;
+    string varname;
+    
+    current = (TOKEN) lexer->yylex();
+    
+    if(current != ID)
+        Error("variable attendue après FOR");
+    varname = lexer->YYText();
+    
+    AssignementStatement();
+    
+    if(current != KEYWORD || strcmp(lexer->YYText(), "TO") != 0)
+        Error("mot-clé TO attendu");
+    current = (TOKEN) lexer->yylex();
+    
+    cout << "For" << tag << ":" << endl;
+    cout << "\tpush " << varname << endl;
+    
+    if(Expression() != INTEGER)
+        Error("expression entière attendue");
+    
+    cout << "\tpop %rax" << endl;
+    cout << "\tpop %rbx" << endl;
+    cout << "\tcmpq %rax, %rbx" << endl;
+    cout << "\tja EndFor" << tag << endl;
+    
+    if(current != KEYWORD || strcmp(lexer->YYText(), "DO") != 0)
+        Error("mot-clé DO attendu");
+    current = (TOKEN) lexer->yylex();
+    
+    Statement();
+    
+    cout << "\tpush " << varname << endl;
+    cout << "\tpop %rax" << endl;
+    cout << "\taddq $1, %rax" << endl;
+    cout << "\tpush %rax" << endl;
+    cout << "\tpop " << varname << endl;
+    
+    cout << "\tjmp For" << tag << endl;
+    cout << "EndFor" << tag << ":" << endl;
 }
-
 // WhileStatement := "WHILE" Expression "DO" Statement
 void WhileStatement(void){
 	unsigned long long tag=TagNumber++;
