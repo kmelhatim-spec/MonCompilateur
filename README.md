@@ -66,3 +66,18 @@ FOR a := 1 TO 5 DO
     DISPLAY a.
 
 Résultat : 12345
+
+
+
+
+
+
+J'ai aussi ajouté le DOWNTO qui permet de compter à l'envers.
+
+Exemple (testdownto.p) :
+
+VAR a : INTEGER.
+FOR a := 5 DOWNTO 1 DO
+    DISPLAY a.
+
+Résultat : 54321
