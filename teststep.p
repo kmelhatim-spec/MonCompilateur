@@ -1,0 +1,3 @@
+VAR a : INTEGER.
+FOR a := 1 TO 10 STEP 2 DO
+    DISPLAY a.

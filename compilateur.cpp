@@ -540,6 +540,7 @@ void ForStatement(void){
     unsigned long long tag = TagNumber++;
     string varname;
     bool downto = false;
+    int step = 1;
 
     current = (TOKEN) lexer->yylex();
 
@@ -571,6 +572,14 @@ void ForStatement(void){
     else
         cout << "\tja EndFor" << tag << endl;
 
+    if(current == KEYWORD && strcmp(lexer->YYText(), "STEP") == 0){
+        current = (TOKEN) lexer->yylex();
+        if(current != NUMBER)
+            Error("nombre entier attendu après STEP");
+        step = atoi(lexer->YYText());
+        current = (TOKEN) lexer->yylex();
+    }
+
     if(current != KEYWORD || strcmp(lexer->YYText(), "DO") != 0)
         Error("mot-clé DO attendu");
     current = (TOKEN) lexer->yylex();
@@ -580,9 +589,9 @@ void ForStatement(void){
     cout << "\tpush " << varname << endl;
     cout << "\tpop %rax" << endl;
     if(downto)
-        cout << "\tsubq $1, %rax" << endl;
+        cout << "\tsubq $" << step << ", %rax" << endl;
     else
-        cout << "\taddq $1, %rax" << endl;
+        cout << "\taddq $" << step << ", %rax" << endl;
     cout << "\tpush %rax" << endl;
     cout << "\tpop " << varname << endl;
 
