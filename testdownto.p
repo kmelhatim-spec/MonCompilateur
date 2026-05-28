@@ -1,0 +1,3 @@
+VAR a : INTEGER.
+FOR a := 5 DOWNTO 1 DO
+    DISPLAY a.
