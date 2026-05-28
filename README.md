@@ -53,3 +53,16 @@ To : 64 bit 80x86 assembly langage (AT&T)
 // Digit := "0"|"1"|"2"|"3"|"4"|"5"|"6"|"7"|"8"|"9"
 // Letter := "a"|...|"z"
 
+## Travail personnel
+
+J'ai implémenté la boucle FOR dans la fonction ForStatement() dans compilateur.cpp.
+
+La boucle FOR permet de répéter une instruction un nombre défini de fois.
+
+## Exemple de test (testfor.p)
+
+VAR a : INTEGER.
+FOR a := 1 TO 5 DO
+    DISPLAY a.
+
+Résultat : 12345
